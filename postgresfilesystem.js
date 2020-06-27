@@ -1,6 +1,6 @@
 const { Pool } = require('pg')
 
-let log = require("@node-red/util").log;
+//let log = require("@node-red/util").log;
 
 //using json instead of jsonb because I will not be querying inside the json, just returning it
 const databaseColumns = `(
