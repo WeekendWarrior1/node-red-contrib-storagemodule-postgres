@@ -1,0 +1,22 @@
+{
+  "name": "red-contrib-storagemodule-postgres",
+  "version": "1.0.0",
+  "description": "A module to provide Node-RED persistence using a postgres database instead of the default filesystem",
+  "main": "postgresfilesystem.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WeekendWarrior1/node-red-contrib-storagemodule-postgres.git"
+  },
+  "author": "Callan Halton",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/WeekendWarrior1/node-red-contrib-storagemodule-postgres/issues"
+  },
+  "homepage": "https://github.com/WeekendWarrior1/node-red-contrib-storagemodule-postgres#readme",
+  "dependencies": {
+    "pg": "^8.2.1"
+  }
+}
