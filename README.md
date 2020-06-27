@@ -4,13 +4,17 @@ A module to provide Node-RED persistence using a postgres database instead of th
 More info here: [Node-RED Storage API](https://nodered.org/docs/api/storage/)
 
 ### How to use:
-Add to your settings.js:
+Add to your settings.js (normally found in '/home/yourHomeDirectory/.node-red/'):
 ``` js
     storageModule: require("node-red-contrib-storagemodule-postgres"),
     postgresURI: "postgres://username:password@postgressIP:5432/database",
     postgresSchema: "public",   //optional, defaults to the public schema
 
     userDir: '/home/yourHomeDirectory/.node-red/', //required at the moment to install nodes via the palette manager
+```
+In the same directory ('/home/yourHomeDirectory/.node-red/'), run:
+```sh
+npm install node-red-contrib-storagemodule-postgres
 ```
 
 ### How it works:
