@@ -9,8 +9,10 @@ Add to your settings.js (normally found in '/home/yourHomeDirectory/.node-red/')
     storageModule: require("node-red-contrib-storagemodule-postgres"),
     postgresURI: "postgres://username:password@postgressIP:5432/database",
     postgresSchema: "public",   //optional, defaults to the public schema
+    // Enable module reinstalls on start-up; this ensures modules installed post-deploy are restored after a restage
+    autoInstallModules: true,
 
-    userDir: '/home/yourHomeDirectory/.node-red/', //required at the moment to install nodes via the palette manager
+    userDir: '/home/yourHomeDirectory/.node-red/', //required to install nodes via the palette manager
 ```
 In the same directory ('/home/yourHomeDirectory/.node-red/'), run:
 ```sh
@@ -25,8 +27,8 @@ This module creates 2 new tables in your postgres database:
 ### Currently not implemented:
 - sessions
 - projects
+- library function snippet storage
 - Doesn't log nicely, doesn't throw errors (just prints them)
 
 ### Currently not working/bugs:
-- Installing nodes via the palette manager works (if a userDir is specified in settings.js), but installed nodes have no persistence, and are lost on a Node-RED reboot. On reboot, flows that contain missing nodes will then stop. Since installed nodes are managed purely in the Node-RED local filesystem The workaround is not pretty, requiring modification of the @node-red/registry/lib, which isn't just drop in.
 - The queries have been hacked together and probably aren't safe from SQL injection.

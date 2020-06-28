@@ -18,5 +18,6 @@
   "homepage": "https://github.com/WeekendWarrior1/node-red-contrib-storagemodule-postgres#readme",
   "dependencies": {
     "pg": "^8.2.1"
-  }
+  },
+  "keywords": [ "node-red" ]
 }
