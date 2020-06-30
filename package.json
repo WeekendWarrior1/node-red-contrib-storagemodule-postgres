@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-storagemodule-postgres",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A module to provide Node-RED persistence using a postgres database instead of the default filesystem",
   "main": "postgresfilesystem.js",
   "scripts": {

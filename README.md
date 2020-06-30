@@ -27,8 +27,4 @@ This module creates 2 new tables in your postgres database:
 ### Currently not implemented:
 - sessions
 - projects
-- library function snippet storage
 - Doesn't log nicely, doesn't throw errors (just prints them)
-
-### Currently not working/bugs:
-- The queries have been hacked together and probably aren't safe from SQL injection.

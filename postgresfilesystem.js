@@ -10,10 +10,11 @@ const databaseColumns = `(
   )`
 
 const libraryColumns = `(
+    type varchar(9),
     filepath varchar,
     filename varchar,
     meta json,
-    file json
+    file varchar
   )`
 
 let settings;
@@ -77,7 +78,7 @@ let postgresfilesystem = {
     },
 
     pgSave: async function(save, json) {
-        return this.pool.query(`UPDATE ${this.schema}.nodered SET ${save} = '${json}'`);
+        return this.pool.query(`UPDATE ${this.schema}.nodered SET ${save} = $1`,[json]);
     },
 
     //getSessions: sessions.getSessions,
@@ -85,13 +86,13 @@ let postgresfilesystem = {
     //projects: projects
 
     getLibraryEntry: async function(type,path) {
-        console.log('getLibraryEntry',type,path);
-        if (type !== "flows") {
+        //console.log('getLibraryEntry',type,path);
+        if ((type !== "flows")&&(type !== "functions")) {
             return; //throw new err;
         }
         let toReturn = [];
         let foldersPushed = new Set();
-        const sqlRes = (await this.pool.query(`SELECT * FROM ${this.schema}.noderedlibrary`)).rows;
+        const sqlRes = (await this.pool.query(`SELECT * FROM ${this.schema}.noderedlibrary WHERE type=$1`,[type])).rows;
         for (let row of sqlRes) {
             if (path == `${row.filepath}${row.filename}`) {
                 return row.file;
@@ -109,14 +110,14 @@ let postgresfilesystem = {
     },
 
     saveLibraryEntry: async function(type,path,meta,body) {
-        console.log('saveLibraryEntry',type,path,meta,body);
-        if (type !== "flows") {
+        //console.log('saveLibraryEntry',type,path,meta,body);
+        if ((type !== "flows")&&(type !== "functions")) {
             return; //throw new err;
         }
         let splitPath = path.split('/');
         const filename = splitPath[splitPath.length-1];
         const filepath = path.replace(filename,'');
-        return await this.pool.query(`INSERT INTO ${this.schema}.noderedlibrary (filepath, filename, meta, file) VALUES ('${filepath}','${filename}','${JSON.stringify(meta)}', '${JSON.stringify(body)}')`);
+        return await this.pool.query(`INSERT INTO ${this.schema}.noderedlibrary (type, filepath, filename, meta, file) VALUES ($1,$2,$3,$4,$5)`,[type,filepath,filename,meta,body]);
     }
     
 };
